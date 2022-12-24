@@ -26,23 +26,42 @@ public class University {
     }
 
     public String registerStudent(Student student) {
-
-        return null;
+        if (students.size() < capacity) {
+            if (!students.contains(student)){
+                students.add(student);
+              return String.format("Added student %s %s", student.firstName, student.lastName);
+            } else {
+               return String.format("Student is already in the university");
+            }
+        } else {
+           return String.format("No seats in the university");
+        }
     }
 
     public String dismissStudent(Student student) {
-        return null;
+        if (students.contains(student)){
+            students.remove(student);
+            return String.format("Removed student %s %s", student.firstName, student.lastName);
+        } else {
+            return String.format("Student not found");
+        }
     }
 
-    public String getStudent(String firstName, String lastName) {
+    public Student getStudent(String firstName, String lastName) {
+        for (Student student : students) {
+            if (student.getFirstName().equals(firstName) && student.getLastName().equals(lastName)){
+                return student;
+            }
+        }
         return null;
     }
 
     public String getStatistics() {
         StringBuilder sb = new StringBuilder();
-
-        sb.append("o\t\"==Student: First Name = {firstName}, Last Name = {lastName}, Best Subject = {bestSubject} ")
-        return null;
+        for (Student student : students) {
+            sb.append(String.format("==Student: First Name = %s, Last Name = %s, Best Subject = %s ", student.firstName, student.lastName, student.bestSubject)).append(System.lineSeparator());
+        }
+        return sb.toString().trim();
     }
 
 
